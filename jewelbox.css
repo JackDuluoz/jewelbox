@@ -28,7 +28,7 @@ header {
 }
 
 .menu {
-  color: white;
+  color: chartreuse;
   font-weight: 700;
   margin: 0px 20px;
 }
@@ -63,16 +63,20 @@ img {
   background-color: black;
 }
 
-#new-game {
+#new-game, #toggle-music {
   width: 60px;
   height: 60px;
+  margin-top: 20px;
   background-color: black;
   color: chartreuse;
   border: none;
+  border-radius: 50%;
 }
 
-#new-game:hover {
+#new-game:hover, #toggle-music:hover {
     cursor: pointer;
+    background-color: chartreuse;
+    color: black
   }
 
 footer {

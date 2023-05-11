@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>JewelBox</title>
+  <title>Forest Friends</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico"/>
   <link rel="stylesheet" href="jewelbox.css">
 </head>
 <body>
@@ -19,9 +20,19 @@
     <canvas id="canvas" width="280" height="520"></canvas>
     <div id="right-column">
       <canvas id="nextCanvas" width="60" height="140"></canvas>
-      <button id="new-game" onClick="newGame()">New Game</button>
+      <div class='buttons'>
+        <button id="toggle-music" onClick="toggleMusic()">Music On/Off</button>
+        <button id="new-game" onClick="newGame()">New Game</button>
+      </div>
     </div>
     <img id="image" src="rotations.png" />
+    <img id="bird" src="bird.png" />
+    <img id="duck" src="duck.png" />
+    <img id="fox" src="fox.png" />
+    <img id="frog" src="frog.png" />
+    <img id="ladybug" src="ladybug.png" />
+    <img id="lizard" src="lizard.png" />
+    <img id="rabbit" src="rabbit.png" />
   </div>
 
   <footer>
@@ -32,6 +43,10 @@
     <div class='score'>
       <div>Level</div>
       <div id="level">1</div>
+    </div>
+    <div class='score'>
+      <div>Matches</div>
+      <div id="matches">0</div>
     </div>
     <div class='score'>
       <div>Score</div>

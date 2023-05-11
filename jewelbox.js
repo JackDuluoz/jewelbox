@@ -1,15 +1,15 @@
 
 class Jewel {
   constructor(topY, middleY, bottomY) {
-    this.colours = [topY, middleY, bottomY]
+    this.animals = [topY, middleY, bottomY]
     this.top = [0, 3]
     this.middle = [1, 3]
     this.bottom = [2, 3]
   }
   create() {
-    gameMap[this.top[0]][this.top[1]] = this.colours[0]
-    gameMap[this.middle[0]][this.middle[1]] = this.colours[1]
-    gameMap[this.bottom[0]][this.bottom[1]] = this.colours[2]
+    gameMap[this.top[0]][this.top[1]] = this.animals[0]
+    gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+    gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
     drawCanvas()     
   }
   checkBottom() {
@@ -44,9 +44,9 @@ class Jewel {
       this.top[1] -= 1
       this.middle[1] -= 1
       this.bottom[1] -= 1
-      gameMap[this.top[0]][this.top[1]] = this.colours[0]
-      gameMap[this.middle[0]][this.middle[1]] = this.colours[1]
-      gameMap[this.bottom[0]][this.bottom[1]] = this.colours[2]
+      gameMap[this.top[0]][this.top[1]] = this.animals[0]
+      gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+      gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
       drawCanvas()
     }
   }
@@ -61,9 +61,9 @@ class Jewel {
       this.top[1] += 1
       this.middle[1] += 1
       this.bottom[1] += 1
-      gameMap[this.top[0]][this.top[1]] = this.colours[0]
-      gameMap[this.middle[0]][this.middle[1]] = this.colours[1]
-      gameMap[this.bottom[0]][this.bottom[1]] = this.colours[2]
+      gameMap[this.top[0]][this.top[1]] = this.animals[0]
+      gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+      gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
       drawCanvas()
     }
   }
@@ -78,9 +78,9 @@ class Jewel {
       this.top[0] += 1
       this.middle[0] += 1
       this.bottom[0] += 1
-      gameMap[this.top[0]][this.top[1]] = this.colours[0]
-      gameMap[this.middle[0]][this.middle[1]] = this.colours[1]
-      gameMap[this.bottom[0]][this.bottom[1]] = this.colours[2]
+      gameMap[this.top[0]][this.top[1]] = this.animals[0]
+      gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+      gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
       drawCanvas()
     } else {
       checkMatches()
@@ -102,8 +102,8 @@ class Jewel {
         levelMatches = 0
       }
       currentShape = nextShape
-      nextShape = new Jewel(randomColour(), randomColour(), randomColour())
-      drawNext(nextShape.colours)
+      nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+      drawNext(nextShape.animals)
       currentShape.create()
       drawCanvas()
     }
@@ -112,10 +112,10 @@ class Jewel {
     context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
     context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
     context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
-    this.colours.unshift(this.colours.pop())
-    gameMap[this.top[0]][this.top[1]] = this.colours[0]
-    gameMap[this.middle[0]][this.middle[1]] = this.colours[1]
-    gameMap[this.bottom[0]][this.bottom[1]] = this.colours[2]
+    this.animals.unshift(this.animals.pop())
+    gameMap[this.top[0]][this.top[1]] = this.animals[0]
+    gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+    gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
     drawCanvas()    
   }
 }
@@ -127,15 +127,22 @@ let levelMatches = 0
 let level = 1
 let gameSpeed = 1
 const image = document.getElementById('image')
+const bird = document.getElementById('bird')
+const duck = document.getElementById('duck')
+const fox = document.getElementById('fox')
+const frog = document.getElementById('frog')
+const ladybug = document.getElementById('ladybug')
+const lizard = document.getElementById('lizard')
+const rabbit = document.getElementById('rabbit')
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext("2d")
 const nextCanvas = document.getElementById('nextCanvas')
 const nextContext = nextCanvas.getContext("2d")
 // const squareCountX = canvas.width / blockSize
 // const squareCountY = canvas.height / blockSize
-const coloursY = [0, 24, 48, 72, 96, 120, 144]
+const animalsY = [bird, duck, fox, frog, ladybug, lizard, rabbit]
 
-const randomColour = () => {
+const randomAnimal = () => {
   return Math.floor(Math.random() * 7)
 }
 
@@ -160,6 +167,7 @@ let gameMap = [
 let gameOver = false
 let lives = document.getElementById('lives')
 let footerLevel = document.getElementById('level')
+let footerMatches = document.getElementById('matches')
 let score = document.getElementById('score')
 
 const auto = () => {
@@ -191,34 +199,34 @@ const drawCanvas = () => {
   for (let row = 2; row < gameMap.length; row ++) {
     for (let column = 0; column < gameMap[row].length; column++) {
       if (gameMap[row][column] === 0) {
-        context.drawImage(image, 0, 0, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(bird, 0, 0, 225, 225, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 1) {
-        context.drawImage(image, 0, 24, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(duck, 0, 0, 225, 225, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 2) {
-        context.drawImage(image, 0, 48, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(fox, 0, 0, 256, 256, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 3) {
-        context.drawImage(image, 0, 72, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(frog, 0, 0, 205, 205, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 4) {
-        context.drawImage(image, 0, 96, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(ladybug, 0, 0, 166, 166, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 5) {
-        context.drawImage(image, 0, 120, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(lizard, 0, 0, 900, 900, column*40, (row-2)*40, blockSize, blockSize)
       }
       if (gameMap[row][column] === 6) {
-        context.drawImage(image, 0, 144, imageSquareSize, imageSquareSize, column*40, (row-2)*40, blockSize, blockSize)
+        context.drawImage(rabbit, 0, 0, 225, 225, column*40, (row-2)*40, blockSize, blockSize)
       }
     }
   }
 }
 
-const drawNext = (colours) => {
-  nextContext.drawImage(image, 0, coloursY[colours[0]], 24, 24, 13, 12, 40, 40)
-  nextContext.drawImage(image, 0, coloursY[colours[1]], 24, 24, 13, 52, 40, 40)
-  nextContext.drawImage(image, 0, coloursY[colours[2]], 24, 24, 13, 92, 40, 40)
+const drawNext = (animals) => {
+  nextContext.drawImage(animalsY[animals[0]], 0, 0, animalsY[animals[0]].width, animalsY[animals[0]].height, 10, 10, 40, 40)
+  nextContext.drawImage(animalsY[animals[1]], 0, 0, animalsY[animals[1]].width, animalsY[animals[1]].height, 10, 50, 40, 40)
+  nextContext.drawImage(animalsY[animals[2]], 0, 0, animalsY[animals[2]].width, animalsY[animals[2]].height, 10, 90, 40, 40)
 }
  
 const beep = () => {   
@@ -298,7 +306,6 @@ const checkMatches = () => {
       }
     }
   }
-  // console.log(matches)
   for (let match of matches) {
     gameMap[match[0]][match[1]] = 7
   }
@@ -306,7 +313,7 @@ const checkMatches = () => {
     score.innerHTML = Number(score.innerHTML) + (50 * matches.length * level)
     beep()
     levelMatches += matches.length
-    console.log("Matches this Level", levelMatches)
+    footerMatches.innerHTML = Number(footerMatches.innerHTML) + matches.length
   }
   matches = []
   collapseColumns()
@@ -331,27 +338,37 @@ const collapseColumns = () => {
   }
 }
 
-// const backgroundMusic = new Audio('music.mp3')
-// backgroundMusic.autoplay = true
+let music = true
+const backgroundMusic = new Audio('music.mp3')
+backgroundMusic.autoplay = true
 
-// const playMusic = () => {  
-//   backgroundMusic.play();
-//   setTimeout(playMusic, 240007)
-// }
+const playMusic = () => {
+  music = true
+  backgroundMusic.play();
+  setTimeout(playMusic, 240007)
+}
 
-// const stopMusic = () => {  
-//   backgroundMusic.pause();
-//   backgroundMusic.currentTime = 0
-// }
+const stopMusic = () => {
+  music = false
+  backgroundMusic.pause();
+}
+
+const toggleMusic = () => {
+  if (music === true) {
+    stopMusic()
+  } else {
+    playMusic()
+  }
+}
 
 const newGame = () => {
   window.location.reload()
 }
 
-let currentShape = new Jewel(randomColour(), randomColour(), randomColour())
-let nextShape = new Jewel(randomColour(), randomColour(), randomColour())
+let currentShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+let nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
 currentShape.create()
-drawNext(nextShape.colours)
-// playMusic()
+drawNext(nextShape.animals)
+playMusic()
 
 gameLoop()

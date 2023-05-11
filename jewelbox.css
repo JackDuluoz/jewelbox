@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: url('./forest.jpg');
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-size: cover;
+}
+
+header {
+  width: 100vw;
+  height: 5vh;
+  background: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menu {
+  color: white;
+  font-weight: 700;
+  margin: 0px 20px;
+}
+
+.page {
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  display: none;
+}
+
+#canvas {
+  background-color: black;
+}
+
+#right-column {
+  width: 60px;
+  height: 520px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#nextCanvas {  
+  background-color: black;
+}
+
+#new-game {
+  width: 60px;
+  height: 60px;
+  background-color: black;
+  color: chartreuse;
+  border: none;
+}
+
+#new-game:hover {
+    cursor: pointer;
+  }
+
+footer {
+  width: 100vw;
+  height: 10vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  color: chartreuse;
+  margin: 0px 20px;
+  text-align: center;
+}
+
+.score div {
+  padding: 2px;
+}

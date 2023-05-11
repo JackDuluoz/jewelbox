@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>JewelBox</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="jewelbox.css">
+</head>
+<body>
+
+  <header>
+    <div class='menu'>Game</div>
+    <div class='menu'>Options</div>
+    <div class='menu'>Help</div>
+  </header>
+
+  <div class='page'>
+    <canvas id="canvas" width="280" height="520"></canvas>
+    <div id="right-column">
+      <canvas id="nextCanvas" width="60" height="140"></canvas>
+      <button id="new-game" onClick="newGame()">New Game</button>
+    </div>
+    <img id="image" src="rotations.png" />
+  </div>
+
+  <footer>
+    <div class='score'>
+      <div>Lives</div>
+      <div id="lives">3</div>
+    </div>
+    <div class='score'>
+      <div>Level</div>
+      <div id="level">1</div>
+    </div>
+    <div class='score'>
+      <div>Score</div>
+      <div id="score">1000</div>
+    </div>
+  </footer>
+
+</body>
+<script src="jewelbox.js"></script>
+</html>

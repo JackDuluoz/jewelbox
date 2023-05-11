@@ -53,14 +53,38 @@ img {
 #right-column {
   width: 60px;
   height: 520px;
-  margin-left: 20px;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 #nextCanvas {  
   background-color: black;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile {
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: black;
+  color: chartreuse;
+  border: none;
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+.mobile:hover {
+  cursor: pointer;
+  background-color: chartreuse;
+  color: black
 }
 
 #new-game, #toggle-music {
@@ -74,10 +98,10 @@ img {
 }
 
 #new-game:hover, #toggle-music:hover {
-    cursor: pointer;
-    background-color: chartreuse;
-    color: black
-  }
+  cursor: pointer;
+  background-color: chartreuse;
+  color: black
+}
 
 footer {
   width: 100vw;

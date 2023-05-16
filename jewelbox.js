@@ -194,6 +194,29 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+let touchstartX = 0
+let touchendX = 0
+    
+const checkDirection = () => {
+  if (touchendX < touchstartX) {
+    console.log("swiped left")
+    currentShape.moveLeft();
+  }
+  if (touchendX > touchstartX) {
+    console.log("swiped right")
+    currentShape.moveRight();
+  }
+}
+
+canvas.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+canvas.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  checkDirection()
+})
+
 const drawCanvas = () => {
   context.clearRect(0, 0, 280, 520)
   for (let row = 2; row < gameMap.length; row ++) {

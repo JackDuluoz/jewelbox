@@ -69,24 +69,6 @@ img {
   flex-direction: column;
 }
 
-.mobile {
-  width: 40px;
-  height: 40px;
-  margin-top: 10px;
-  background-color: black;
-  color: chartreuse;
-  border: none;
-  border-radius: 50%;
-  align-self: center;
-  justify-self: center;
-}
-
-.mobile:hover {
-  cursor: pointer;
-  background-color: chartreuse;
-  color: black
-}
-
 #new-game, #toggle-music {
   width: 60px;
   height: 60px;

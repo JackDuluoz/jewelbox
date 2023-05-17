@@ -202,14 +202,21 @@ let touchendY = 0
 const checkDirection = () => {
   let xChange = touchendX - touchstartX
   let yChange = touchendY - touchstartY
-  console.log(xChange)
-  console.log(yChange)
-  if (touchendX < touchstartX) {
-    currentShape.moveLeft();
+  console.log('X Change: ', xChange)
+  console.log('Y Change: ', yChange)
+  if (Math.abs(xChange) > Math.abs(yChange)) {
+    if (touchendX < touchstartX) {
+      currentShape.moveLeft();
+    }
+    if (touchendX > touchstartX) {
+      currentShape.moveRight();
+    }
   }
-  if (touchendX > touchstartX) {
-    currentShape.moveRight();
-  }
+  if (Math.abs(yChange) > Math.abs(xChange)) {
+    if (touchendY > touchstartY) {
+      currentShape.changeOrder();
+    }    
+  }  
 }
 
 canvas.addEventListener('touchstart', e => {

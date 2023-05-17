@@ -16,6 +16,7 @@ body {
   background-blend-mode: multiply;
   background-position: center center;
   background-size: cover;
+  overscroll-behavior: none;
 }
 
 header {
@@ -48,6 +49,7 @@ img {
 
 #canvas {
   background-color: black;
+  overscroll-behavior: none;
 }
 
 #right-column {

@@ -74,7 +74,7 @@ img {
   flex-direction: column;
 }
 
-#new-game, #toggle-music {
+.right-buttons {
   width: 60px;
   height: 60px;
   margin-top: 20px;
@@ -84,7 +84,7 @@ img {
   border-radius: 50%;
 }
 
-#new-game:hover, #toggle-music:hover {
+.right-buttons:hover {
   cursor: pointer;
   background-color: chartreuse;
   color: black

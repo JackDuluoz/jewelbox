@@ -34,7 +34,7 @@ class Jewel {
     }
   }  
   moveLeft() {
-    if (this.checkLeft()) {
+    if (!gameOver && this.checkLeft()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -51,7 +51,7 @@ class Jewel {
     }
   }
   moveRight() {
-    if (this.checkRight()) {
+    if (!gameOver && this.checkRight()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -68,7 +68,7 @@ class Jewel {
     }
   }
   moveBottom() {
-    if (this.checkBottom()) {
+    if (!gameOver && this.checkBottom()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -88,8 +88,8 @@ class Jewel {
         for (let column = 0; column < gameMap[row].length; column++) {
           if (gameMap[row][column] !== 7) {
             gameOver = true
-            console.log('Game Over!')
-            // stopMusic()
+            endGame()
+            stopMusic()
             return
           }
         }
@@ -109,14 +109,16 @@ class Jewel {
     }
   }
   changeOrder() {
-    context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
-    context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
-    context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
-    this.animals.unshift(this.animals.pop())
-    gameMap[this.top[0]][this.top[1]] = this.animals[0]
-    gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
-    gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
-    drawCanvas()    
+    if (!gameOver) {
+      context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
+      context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
+      context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
+      this.animals.unshift(this.animals.pop())
+      gameMap[this.top[0]][this.top[1]] = this.animals[0]
+      gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+      gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
+      drawCanvas()    
+    }
   }
 }
 
@@ -134,6 +136,7 @@ const frog = document.getElementById('frog')
 const ladybug = document.getElementById('ladybug')
 const lizard = document.getElementById('lizard')
 const rabbit = document.getElementById('rabbit')
+const gameover = document.getElementById('gameover')
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext("2d")
 const nextCanvas = document.getElementById('nextCanvas')
@@ -172,6 +175,7 @@ let score = document.getElementById('score')
 
 const auto = () => {
   if (gameOver) {
+    endGame()
     return
   }
   currentShape.moveBottom()
@@ -181,6 +185,10 @@ const auto = () => {
 const gameLoop = () => {
   setTimeout(auto, 1000 / gameSpeed);
 };
+
+const endGame = () => {
+  context.drawImage(gameover, 0, 0, 540, 360, 0, 160, 280, 180)
+}
 
 window.addEventListener("keydown", (event) => {
   if (event.key === 'ArrowLeft') {
@@ -202,8 +210,6 @@ let touchendY = 0
 const checkDirection = () => {
   let xChange = touchendX - touchstartX
   let yChange = touchendY - touchstartY
-  console.log('X Change: ', xChange)
-  console.log('Y Change: ', yChange)
   if (Math.abs(xChange) > Math.abs(yChange)) {
     if (touchendX < touchstartX) {
       currentShape.moveLeft();
@@ -267,11 +273,6 @@ const drawNext = (animals) => {
   nextContext.drawImage(animalsY[animals[0]], 0, 0, animalsY[animals[0]].width, animalsY[animals[0]].height, 10, 10, 40, 40)
   nextContext.drawImage(animalsY[animals[1]], 0, 0, animalsY[animals[1]].width, animalsY[animals[1]].height, 10, 50, 40, 40)
   nextContext.drawImage(animalsY[animals[2]], 0, 0, animalsY[animals[2]].width, animalsY[animals[2]].height, 10, 90, 40, 40)
-}
- 
-const beep = () => {   
-  const beepsound = new Audio('beep.mp3');   
-  beepsound.play();   
 } 
 
 const checkMatches = () => {
@@ -380,7 +381,15 @@ const collapseColumns = () => {
 
 let music = true
 const backgroundMusic = new Audio('music.mp3')
+backgroundMusic.volume = 0.02
 backgroundMusic.autoplay = true
+
+const beepsound = new Audio('beep.mp3');
+beepsound.volume = 0.1
+
+const beep = () => {   
+  beepsound.play();   
+}
 
 const playMusic = () => {
   music = true
@@ -401,6 +410,20 @@ const toggleMusic = () => {
   }
 }
 
+const volumeUp = () => {
+  if (backgroundMusic.volume <= 0.195) {
+    beepsound.volume += 0.005
+    backgroundMusic.volume += 0.005
+  }
+}
+
+const volumeDown = () => {
+  if (backgroundMusic.volume >= 0.005) {
+    beepsound.volume -= 0.005
+    backgroundMusic.volume -= 0.005
+  }
+}
+
 const newGame = () => {
   window.location.reload()
 }
@@ -409,6 +432,5 @@ let currentShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
 let nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
 currentShape.create()
 drawNext(nextShape.animals)
-playMusic()
 
 gameLoop()

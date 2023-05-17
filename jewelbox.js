@@ -214,7 +214,7 @@ const checkDirection = () => {
   }
   if (Math.abs(yChange) > Math.abs(xChange)) {
     if (touchendY > touchstartY) {
-      currentShape.changeOrder();
+      currentShape.moveBottom();
     }    
   }  
 }

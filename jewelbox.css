@@ -16,7 +16,6 @@ body {
   background-blend-mode: multiply;
   background-position: center center;
   background-size: cover;
-  overscroll-behavior: none;
 }
 
 header {

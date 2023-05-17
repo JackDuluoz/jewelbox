@@ -196,25 +196,35 @@ window.addEventListener("keydown", (event) => {
 
 let touchstartX = 0
 let touchendX = 0
+let touchstartY = 0
+let touchendY = 0
     
 const checkDirection = () => {
+  let xChange = touchendX - touchstartX
+  let yChange = touchendY - touchstartY
+  console.log(xChange)
+  console.log(yChange)
   if (touchendX < touchstartX) {
-    console.log("swiped left")
     currentShape.moveLeft();
   }
   if (touchendX > touchstartX) {
-    console.log("swiped right")
     currentShape.moveRight();
   }
 }
 
 canvas.addEventListener('touchstart', e => {
   touchstartX = e.changedTouches[0].screenX
+  touchstartY = e.changedTouches[0].screenY
 })
 
 canvas.addEventListener('touchend', e => {
   touchendX = e.changedTouches[0].screenX
+  touchendY = e.changedTouches[0].screenY
   checkDirection()
+})
+
+canvas.addEventListener('click', e => {
+  currentShape.changeOrder()
 })
 
 const drawCanvas = () => {

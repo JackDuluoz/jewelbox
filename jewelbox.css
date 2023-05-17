@@ -48,7 +48,7 @@ img {
 
 #canvas {
   background-color: black;
-  overscroll-behavior: none;
+  overscroll-behavior-y: contain;
 }
 
 #right-column {

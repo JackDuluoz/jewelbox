@@ -220,11 +220,17 @@ const checkDirection = () => {
 }
 
 canvas.addEventListener('touchstart', e => {
+  e.preventDefault()
   touchstartX = e.changedTouches[0].screenX
   touchstartY = e.changedTouches[0].screenY
 })
 
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault()
+})
+
 canvas.addEventListener('touchend', e => {
+  e.preventDefault()
   touchendX = e.changedTouches[0].screenX
   touchendY = e.changedTouches[0].screenY
   checkDirection()

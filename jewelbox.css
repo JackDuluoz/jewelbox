@@ -48,7 +48,6 @@ img {
 
 #canvas {
   background-color: black;
-  overscroll-behavior-y: contain;
 }
 
 #right-column {

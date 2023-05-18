@@ -187,7 +187,7 @@ const gameLoop = () => {
 };
 
 const endGame = () => {
-  context.drawImage(gameover, 0, 0, 540, 360, 0, 160, 280, 180)
+  context.drawImage(gameover, 0, 0, 286, 200, 0, 150, 280, 200)
 }
 
 window.addEventListener("keydown", (event) => {

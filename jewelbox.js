@@ -87,10 +87,40 @@ class Jewel {
       for (let row = 0; row < 2; row++) {
         for (let column = 0; column < gameMap[row].length; column++) {
           if (gameMap[row][column] !== 7) {
-            gameOver = true
-            endGame()
-            stopMusic()
-            return
+            if (lives > 1) {
+              gameMap = [
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7],
+                [7, 7, 7, 7, 7, 7, 7]
+              ]
+              lives--
+              footerLives.innerHTML = lives
+              currentShape = nextShape
+              nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+              drawNext(nextShape.animals)
+              currentShape.create()
+              drawCanvas()
+              return
+            } else {
+              gameOver = true
+              endGame()
+              stopMusic()
+              lives = 0
+              footerLives.innerHTML = 0
+              return
+            }
           }
         }
       }
@@ -125,8 +155,10 @@ class Jewel {
 const imageSquareSize = 24
 const blockSize = 40
 const framesPerSecond = 24
-let levelMatches = 0
+let gameOver = false
+let lives = 3
 let level = 1
+let levelMatches = 0
 let gameSpeed = 1
 const image = document.getElementById('image')
 const bird = document.getElementById('bird')
@@ -167,8 +199,7 @@ let gameMap = [
   [7, 7, 7, 7, 7, 7, 7]
 ]
 
-let gameOver = false
-let lives = document.getElementById('lives')
+let footerLives = document.getElementById('lives')
 let footerLevel = document.getElementById('level')
 let footerMatches = document.getElementById('matches')
 let score = document.getElementById('score')

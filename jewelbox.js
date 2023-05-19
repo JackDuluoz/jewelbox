@@ -160,7 +160,6 @@ let lives = 3
 let level = 1
 let levelMatches = 0
 let gameSpeed = 1
-const image = document.getElementById('image')
 const bird = document.getElementById('bird')
 const duck = document.getElementById('duck')
 const fox = document.getElementById('fox')

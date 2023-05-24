@@ -1,5 +1,6 @@
 TODO
 
+Space bar to bottom
 Wildcard (unicorn)
 Start game without re-render
 Pause Game

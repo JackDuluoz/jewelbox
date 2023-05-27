@@ -2,8 +2,6 @@ TODO
 
 Space bar to bottom
 Wildcard (unicorn)
-Start game without re-render
-Pause Game
 Menus
 Game Info
 Introduce new animals as levels increase

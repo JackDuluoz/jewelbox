@@ -34,7 +34,7 @@ class Jewel {
     }
   }  
   moveLeft() {
-    if (!gameOver && this.checkLeft()) {
+    if (!paused && !gameOver && this.checkLeft()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -51,7 +51,7 @@ class Jewel {
     }
   }
   moveRight() {
-    if (!gameOver && this.checkRight()) {
+    if (!paused && !gameOver && this.checkRight()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -68,7 +68,7 @@ class Jewel {
     }
   }
   moveBottom() {
-    if (!gameOver && this.checkBottom()) {
+    if (!paused && !gameOver && this.checkBottom()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -82,7 +82,7 @@ class Jewel {
       gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
       gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
       drawCanvas()
-    } else {
+    } else if (!paused) {
       checkMatches()
       for (let row = 0; row < 2; row++) {
         for (let column = 0; column < gameMap[row].length; column++) {
@@ -139,7 +139,7 @@ class Jewel {
     }
   }
   changeOrder() {
-    if (!gameOver) {
+    if (!paused && !gameOver) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
       context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
       context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
@@ -202,23 +202,6 @@ let footerLives = document.getElementById('lives')
 let footerLevel = document.getElementById('level')
 let footerMatches = document.getElementById('matches')
 let score = document.getElementById('score')
-
-const auto = () => {
-  if (gameOver) {
-    endGame()
-    return
-  }
-  currentShape.moveBottom()
-  setTimeout(auto, 1000 / gameSpeed);
-}
-
-const gameLoop = () => {
-  setTimeout(auto, 1000 / gameSpeed);
-};
-
-const endGame = () => {
-  context.drawImage(gameover, 0, 0, 286, 200, 0, 150, 280, 200)
-}
 
 window.addEventListener("keydown", (event) => {
   if (event.key === 'ArrowLeft') {
@@ -410,6 +393,7 @@ const collapseColumns = () => {
 }
 
 let music = true
+let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
 backgroundMusic.volume = 0.02
 backgroundMusic.autoplay = true
@@ -423,12 +407,14 @@ const beep = () => {
 
 const playMusic = () => {
   music = true
+  mute.innerHTML = "Mute"
   backgroundMusic.play();
   setTimeout(playMusic, 240007)
 }
 
 const stopMusic = () => {
   music = false
+  mute.innerHTML = "Unmute"
   backgroundMusic.pause();
 }
 
@@ -454,13 +440,77 @@ const volumeDown = () => {
   }
 }
 
-const newGame = () => {
-  window.location.reload()
+let currentShape
+let nextShape
+
+const resetVariables = () => {
+  context.clearRect(0, 0, 280, 500)
+  gameMap = [
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7],
+              [7, 7, 7, 7, 7, 7, 7]
+  ]
+  gameOver = false
+  paused = false
+  pauseButton.innerHTML = "Pause"
+  lives = 3
+  level = 1
+  levelMatches = 0
+  gameSpeed = 1
+  footerLevel.innerHTML = 1
+  footerLives.innerHTML = 3
+  footerMatches.innerHTML = 0
+  score.innerHTML = 0
+  currentShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+  nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
 }
 
-let currentShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
-let nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
-currentShape.create()
-drawNext(nextShape.animals)
+let loop
 
-gameLoop()
+const gameLoop = () => {
+   if (gameOver) {
+    endGame()
+    return
+  }
+  currentShape.moveBottom()
+  loop = setTimeout(gameLoop, 1000 / gameSpeed);
+};
+
+const endGame = () => {
+  context.drawImage(gameover, 0, 0, 286, 200, 0, 150, 280, 200)
+}
+
+const newGame = () => {
+  clearTimeout(loop)
+  resetVariables()
+  currentShape.create()
+  drawNext(nextShape.animals)
+  gameLoop()
+}
+
+let paused = false
+let pauseButton = document.getElementById("pause")
+
+const pauseGame = () => {
+  if (!paused) {
+    paused = true
+    pauseButton.innerHTML = "Unpause"
+    clearTimeout(loop)
+  } else {
+    paused = false
+    pauseButton.innerHTML = "Pause"
+    gameLoop()
+  }
+}

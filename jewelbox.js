@@ -409,7 +409,7 @@ const playMusic = () => {
   music = true
   mute.innerHTML = "Mute"
   backgroundMusic.play();
-  setTimeout(playMusic, 240007)
+  setTimeout(playMusic, 3600000)
 }
 
 const stopMusic = () => {

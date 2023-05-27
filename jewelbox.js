@@ -396,7 +396,7 @@ let music = true
 let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
 backgroundMusic.volume = 0.02
-backgroundMusic.autoplay = true
+// backgroundMusic.autoplay = true
 
 const beepsound = new Audio('beep.mp3');
 beepsound.volume = 0.1
@@ -497,6 +497,7 @@ const newGame = () => {
   resetVariables()
   currentShape.create()
   drawNext(nextShape.animals)
+  playMusic()
   gameLoop()
 }
 

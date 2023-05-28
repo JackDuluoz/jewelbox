@@ -116,7 +116,7 @@ class Jewel {
             } else {
               gameOver = true
               endGame()
-              stopMusic()
+              // stopMusic()
               lives = 0
               footerLives.innerHTML = 0
               return
@@ -393,7 +393,7 @@ const collapseColumns = () => {
 }
 
 let music = true
-let mute = document.getElementById("mute")
+// let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
 backgroundMusic.volume = 0.02
 // backgroundMusic.autoplay = true
@@ -407,14 +407,14 @@ const beep = () => {
 
 const playMusic = () => {
   music = true
-  mute.innerHTML = "Mute"
+  // mute.innerHTML = "Mute"
   backgroundMusic.play();
   setTimeout(playMusic, 3600000)
 }
 
 const stopMusic = () => {
   music = false
-  mute.innerHTML = "Unmute"
+  // mute.innerHTML = "Unmute"
   backgroundMusic.pause();
 }
 
@@ -464,7 +464,7 @@ const resetVariables = () => {
   ]
   gameOver = false
   paused = false
-  pauseButton.innerHTML = "Pause"
+  // pauseButton.innerHTML = "Pause"
   lives = 3
   level = 1
   levelMatches = 0
@@ -502,7 +502,7 @@ const newGame = () => {
 }
 
 let paused = false
-let pauseButton = document.getElementById("pause")
+// let pauseButton = document.getElementById("pause")
 
 const pauseGame = () => {
   if (gameOver) {
@@ -510,7 +510,7 @@ const pauseGame = () => {
   }
   if (!paused) {
     paused = true
-    pauseButton.innerHTML = "Unpause"
+    // pauseButton.innerHTML = "Unpause"
     context.font = "48px fantasy"
     context.textAlign = "center"
     context.fillStyle = "chartreuse"
@@ -518,9 +518,39 @@ const pauseGame = () => {
     clearTimeout(loop)
   } else {
     paused = false
-    pauseButton.innerHTML = "Pause"
+    // pauseButton.innerHTML = "Pause"
     context.clearRect(0, 0, 280, 500)
     drawCanvas()
     gameLoop()
+  }
+}
+
+const openGame = () => {
+  document.getElementById("game-content").classList.add("show");
+}
+
+const closeGame = (event) => {
+  if (event.toElement.id !== "game-menu") {
+    document.getElementById("game-content").classList.remove("show")
+  }
+}
+
+const openOptions = () => {
+  document.getElementById("options-content").classList.add("show");
+}
+
+const closeOptions = (event) => {
+  if (event.toElement.id !== "options-menu") {
+    document.getElementById("options-content").classList.remove("show")
+  }
+}
+
+const openHelp = () => {
+  document.getElementById("help-content").classList.add("show");
+}
+
+const closeHelp = (event) => {
+  if (event.toElement.id !== "help-menu") {
+    document.getElementById("help-content").classList.remove("show")
   }
 }

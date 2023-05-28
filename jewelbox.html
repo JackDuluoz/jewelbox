@@ -11,22 +11,35 @@
 <body>
 
   <header>
-    <div class='menu'>Game</div>
-    <div class='menu'>Options</div>
-    <div class='menu'>Help</div>
+    <div class="dropdown-menu" id="game-dropdown" onmouseover="openGame()" onmouseout="closeGame(event)">
+      <div class='menu' id="game-menu" >Game</div>
+      <div class="dropdown-content" id="game-content">
+        <div onClick="newGame()">New Game</div>
+        <div onClick="pauseGame()">Pause Game</div>
+      </div>
+    </div>
+    <div class="dropdown-menu" id="options-dropdown" onmouseover="openOptions()" onmouseout="closeOptions(event)">
+      <div class='menu' id="options-menu">Options</div>
+      <div class="dropdown-content" id="options-content">
+        <div onClick="toggleMusic()">Music</div>
+        <div>Sound</div>
+        <div onClick="volumeUp()">Volume Up</div>
+        <div onClick="volumeDown()">Volume Down</div>
+      </div>
+    </div>
+    <div class="dropdown-menu" id="help-dropdown" onmouseover="openHelp()" onmouseout="closeHelp(event)">
+      <div class='menu' id="help-menu">Help</div>
+      <div class="dropdown-content" id="help-content">
+        <div>How to Play</div>
+        <div>About</div>
+      </div>
+    </div>
   </header>
 
   <div class='page'>
     <canvas id="canvas" width="280" height="520"></canvas>
     <div id="right-column">
       <canvas id="nextCanvas" width="60" height="140"></canvas>
-      <div class='buttons'>
-        <button class="right-buttons" onClick="volumeUp()">Volume Up</button>
-        <button class="right-buttons" onClick="volumeDown()">Volume Down</button>
-        <button class="right-buttons" id="mute" onClick="toggleMusic()">Mute</button>
-        <button class="right-buttons" id="pause" onClick="pauseGame()">Pause</button>
-        <button class="right-buttons" onClick="newGame()">New Game</button>
-      </div>
     </div>
     <img id="bird" src="bird.png" />
     <img id="duck" src="duck.png" />

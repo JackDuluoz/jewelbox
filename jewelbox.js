@@ -155,7 +155,7 @@ class Jewel {
 const imageSquareSize = 24
 const blockSize = 40
 const framesPerSecond = 24
-let gameOver = false
+let gameOver = true
 let lives = 3
 let level = 1
 let levelMatches = 0

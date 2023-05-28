@@ -505,13 +505,22 @@ let paused = false
 let pauseButton = document.getElementById("pause")
 
 const pauseGame = () => {
+  if (gameOver) {
+    return
+  }
   if (!paused) {
     paused = true
     pauseButton.innerHTML = "Unpause"
+    context.font = "48px fantasy"
+    context.textAlign = "center"
+    context.fillStyle = "chartreuse"
+    context.fillText("PAUSED", 140, 260)
     clearTimeout(loop)
   } else {
     paused = false
     pauseButton.innerHTML = "Pause"
+    context.clearRect(0, 0, 280, 500)
+    drawCanvas()
     gameLoop()
   }
 }

@@ -1,0 +1,1 @@
+The game can be played at: https://jackduluoz.github.io/jewelbox/jewelbox.html

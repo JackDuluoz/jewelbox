@@ -15,23 +15,31 @@
       <div class='menu' id="game-menu" >Game</div>
       <div class="dropdown-content" id="game-content">
         <div onClick="newGame()">New Game</div>
-        <div onClick="pauseGame()">Pause Game</div>
+        <div id="menu-pause" onClick="pauseGame()">Pause Game</div>
         <div onClick="endGame()">End Game</div>
       </div>
     </div>
     <div class="dropdown-menu" id="options-dropdown" onmouseover="openOptions()" onmouseout="closeOptions(event)">
       <div class='menu' id="options-menu">Options</div>
       <div class="dropdown-content" id="options-content">
-        <div onClick="toggleMusic()">Music</div>
-        <div onClick="toggleSound()">Sound</div>
-        <div onClick="volumeUp()">Volume Up</div>
-        <div onClick="volumeDown()">Volume Down</div>
+        <div class="boolean-menu-item" onClick="toggleMusic()">
+          <div class="boolean-div">Music</div>
+          <div class="boolean-div" id="music-tick">&#10003</div>
+        </div>
+        <div class="boolean-menu-item" onClick="toggleSound()">
+          <div class="boolean-div">Sound</div>
+          <div class="boolean-div" id="sound-tick">&#10003</div>
+        </div>
+        <div onClick="volumeSoft()">Vol: Soft</div>
+        <div onClick="volumeMedium()">Vol: Medium</div>
+        <div onClick="volumeLoud()">Vol: Loud</div>
       </div>
     </div>
     <div class="dropdown-menu" id="help-dropdown" onmouseover="openHelp()" onmouseout="closeHelp(event)">
       <div class='menu' id="help-menu">Help</div>
       <div class="dropdown-content" id="help-content">
         <div>How to Play</div>
+        <div>Controls</div>
         <div>About</div>
       </div>
     </div>
@@ -41,6 +49,10 @@
     <canvas id="canvas" width="280" height="520"></canvas>
     <div id="right-column">
       <canvas id="nextCanvas" width="60" height="140"></canvas>
+      <div class='buttons'>
+        <button class="right-buttons" id="pause" onClick="pauseGame()">Pause</button>
+        <button class="right-buttons" onClick="newGame()">New Game</button>
+      </div>
     </div>
     <img id="bird" src="bird.png" />
     <img id="duck" src="duck.png" />

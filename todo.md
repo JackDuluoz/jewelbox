@@ -1,6 +1,8 @@
 TODO
 
-Menus
+Menus - add ticks (divs) for boolean selections
+      - three sound volumes rather than up/down
+      - add shortcuts and event listeners for menu controls
 Game Info
 
 Space bar to bottom
@@ -14,3 +16,6 @@ Match sound pitch by combo
 Match transition effect
 
 High Scores
+
+Separate code into smaller files
+Refactor for DRY code

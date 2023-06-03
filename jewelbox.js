@@ -407,10 +407,13 @@ const beep = () => {
 }
 
 const toggleSound = () => {
+  let soundTick = document.getElementById('sound-tick')
   if (sound) {
     sound = false
+    soundTick.innerHTML = ""
   } else {
     sound = true
+    soundTick.innerHTML = "&#10003"
   }
 }
 
@@ -428,25 +431,29 @@ const stopMusic = () => {
 }
 
 const toggleMusic = () => {
-  if (music === true) {
+  let musicTick = document.getElementById('music-tick')
+  if (music) {
+    musicTick.innerHTML = ""
     stopMusic()
   } else {
+    musicTick.innerHTML = "&#10003"
     playMusic()
   }
 }
 
-const volumeUp = () => {
-  if (backgroundMusic.volume <= 0.195) {
-    beepsound.volume += 0.005
-    backgroundMusic.volume += 0.005
-  }
+const volumeSoft = () => {
+  backgroundMusic.volume = 0.01
+  beepsound.volume = 0.05
 }
 
-const volumeDown = () => {
-  if (backgroundMusic.volume >= 0.005) {
-    beepsound.volume -= 0.005
-    backgroundMusic.volume -= 0.005
-  }
+const volumeMedium = () => {
+  backgroundMusic.volume = 0.05
+  beepsound.volume = 0.25
+}
+
+const volumeLoud = () => {
+  backgroundMusic.volume = 0.1
+  beepsound.volume = 0.5
 }
 
 let currentShape
@@ -473,7 +480,8 @@ const resetVariables = () => {
   ]
   gameOver = false
   paused = false
-  // pauseButton.innerHTML = "Pause"
+  pauseButton.innerHTML = "Pause"
+  menuPause.innerHTML = "Pause Game"
   lives = 3
   level = 1
   levelMatches = 0
@@ -500,6 +508,8 @@ const gameLoop = () => {
 const endGame = () => {
   gameOver = true
   context.drawImage(gameover, 0, 0, 286, 200, 0, 150, 280, 200)
+  pauseButton.innerHTML = "Pause"
+  menuPause.innerHTML = "Pause Game"
 }
 
 const newGame = () => {
@@ -512,7 +522,8 @@ const newGame = () => {
 }
 
 let paused = false
-// let pauseButton = document.getElementById("pause")
+let pauseButton = document.getElementById("pause")
+let menuPause = document.getElementById('menu-pause')
 
 const pauseGame = () => {
   if (gameOver) {
@@ -520,7 +531,8 @@ const pauseGame = () => {
   }
   if (!paused) {
     paused = true
-    // pauseButton.innerHTML = "Unpause"
+    pauseButton.innerHTML = "Unpause"
+    menuPause.innerHTML = "Unpause Game"
     context.font = "48px fantasy"
     context.textAlign = "center"
     context.fillStyle = "chartreuse"
@@ -528,7 +540,8 @@ const pauseGame = () => {
     clearTimeout(loop)
   } else {
     paused = false
-    // pauseButton.innerHTML = "Pause"
+    pauseButton.innerHTML = "Pause"
+    menuPause.innerHTML = "Pause Game"
     context.clearRect(0, 0, 280, 500)
     drawCanvas()
     gameLoop()

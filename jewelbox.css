@@ -81,6 +81,16 @@ header {
   background-color: rgba(127, 255, 0, 0.1);
 }
 
+.boolean-menu-item {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.boolean-div {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .page {
   width: 100vw;
   height: 85vh;
@@ -110,6 +120,30 @@ img {
 
 #nextCanvas {  
   background-color: black;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-buttons {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  background-color: black;
+  color: chartreuse;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-buttons:hover {
+  cursor: pointer;
+  background-color: chartreuse;
+  color: black
 }
 
 footer {

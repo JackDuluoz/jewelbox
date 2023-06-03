@@ -578,7 +578,9 @@ const newGame = () => {
   resetVariables()
   currentShape.create()
   drawNext(nextShape.animals)
-  playMusic()
+  if (music) {
+    playMusic()
+  }
   gameLoop()
 }
 

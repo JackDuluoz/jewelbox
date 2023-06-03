@@ -243,19 +243,19 @@ document.addEventListener("keydown", (event) => {
     currentShape.moveBottom();
   } else if (event.code === 'Space') {
     currentShape.slam();
-  } else if (event.ctrlKey && event.key === 'g') {
+  } else if (event.altKey && event.key === 'n') {
     event.preventDefault()
     newGame()
-  } else if (event.ctrlKey && event.key === 'p') {
+  } else if (event.altKey && event.key === 'p') {
     event.preventDefault()
     pauseGame()
-  } else if (event.ctrlKey && event.key === 'e') {
+  } else if (event.altKey && event.key === 'e') {
     event.preventDefault()
     endGame()
-  } else if (event.ctrlKey && event.key === 'm') {
+  } else if (event.altKey && event.key === 'm') {
     event.preventDefault()
     toggleMusic()
-  } else if (event.ctrlKey && event.key === 's') {
+  } else if (event.altKey && event.key === 's') {
     event.preventDefault()
     toggleSound()
   }

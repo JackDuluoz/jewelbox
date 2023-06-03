@@ -114,9 +114,7 @@ class Jewel {
               drawCanvas()
               return
             } else {
-              gameOver = true
               endGame()
-              // stopMusic()
               lives = 0
               footerLives.innerHTML = 0
               return
@@ -393,6 +391,7 @@ const collapseColumns = () => {
 }
 
 let music = true
+let sound = true
 // let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
 backgroundMusic.volume = 0.02
@@ -401,8 +400,18 @@ backgroundMusic.volume = 0.02
 const beepsound = new Audio('beep.mp3');
 beepsound.volume = 0.1
 
-const beep = () => {   
-  beepsound.play();   
+const beep = () => {
+  if (sound) {
+    beepsound.play();   
+  }
+}
+
+const toggleSound = () => {
+  if (sound) {
+    sound = false
+  } else {
+    sound = true
+  }
 }
 
 const playMusic = () => {
@@ -489,6 +498,7 @@ const gameLoop = () => {
 };
 
 const endGame = () => {
+  gameOver = true
   context.drawImage(gameover, 0, 0, 286, 200, 0, 150, 280, 200)
 }
 

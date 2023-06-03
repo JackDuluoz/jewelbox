@@ -16,13 +16,14 @@
       <div class="dropdown-content" id="game-content">
         <div onClick="newGame()">New Game</div>
         <div onClick="pauseGame()">Pause Game</div>
+        <div onClick="endGame()">End Game</div>
       </div>
     </div>
     <div class="dropdown-menu" id="options-dropdown" onmouseover="openOptions()" onmouseout="closeOptions(event)">
       <div class='menu' id="options-menu">Options</div>
       <div class="dropdown-content" id="options-content">
         <div onClick="toggleMusic()">Music</div>
-        <div>Sound</div>
+        <div onClick="toggleSound()">Sound</div>
         <div onClick="volumeUp()">Volume Up</div>
         <div onClick="volumeDown()">Volume Down</div>
       </div>

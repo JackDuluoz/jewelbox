@@ -30,9 +30,18 @@
           <div class="boolean-div">Sound</div>
           <div class="boolean-div" id="sound-tick">&#10003</div>
         </div>
-        <div onClick="volumeSoft()">Vol: Soft</div>
-        <div onClick="volumeMedium()">Vol: Medium</div>
-        <div onClick="volumeLoud()">Vol: Loud</div>
+        <div class="boolean-menu-item" onClick="volumeSoft()">
+          <div class="boolean-div">Vol: Soft</div>
+          <div class="boolean-div" id="soft-tick"></div>
+        </div>
+        <div class="boolean-menu-item" onClick="volumeMedium()">
+          <div class="boolean-div">Vol: Medium</div>
+          <div class="boolean-div" id="medium-tick">&#10003</div>
+        </div>
+        <div class="boolean-menu-item" onClick="volumeLoud()">
+          <div class="boolean-div">Vol: Loud</div>
+          <div class="boolean-div" id="loud-tick"></div>
+        </div>
       </div>
     </div>
     <div class="dropdown-menu" id="help-dropdown" onmouseover="openHelp()" onmouseout="closeHelp(event)">

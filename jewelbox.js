@@ -12,13 +12,6 @@ class Jewel {
     gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
     drawCanvas()     
   }
-  checkBottom() {
-    if ((this.bottom[0] < 14) && (gameMap[this.bottom[0] + 1][this.bottom[1]] === 7)) {
-      return true
-    } else {
-      return false
-    }
-  }
   checkLeft() {
     if ((this.bottom[1] > 0) && (gameMap[this.bottom[0]][this.bottom[1] - 1] === 7)) {
       return true
@@ -32,7 +25,24 @@ class Jewel {
     } else {
       return false
     }
-  }  
+  }
+  checkBottom() {
+    if ((this.bottom[0] < 14) && (gameMap[this.bottom[0] + 1][this.bottom[1]] === 7)) {
+      return true
+    } else {
+      return false
+    }
+  }
+  findBottom(bottomAnimal) {
+    let column = bottomAnimal[1]
+    let row = bottomAnimal[0]
+    for (let r = row + 1; r < gameMap.length; r++) {
+      if (gameMap[r][column] !== 7) {
+        return [r, column]
+      }
+    }
+    return [gameMap.length, column]
+  }
   moveLeft() {
     if (!paused && !gameOver && this.checkLeft()) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
@@ -136,6 +146,27 @@ class Jewel {
       drawCanvas()
     }
   }
+  slam() {
+    if (!paused && !gameOver && this.checkBottom()) {
+      const bottomStart = this.bottom[0]
+      const bottom = this.findBottom(this.bottom)
+      const slamDistance = bottom[0] - bottomStart
+      context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
+      context.clearRect(this.middle[1] * 40, this.middle[0] * 40, blockSize, blockSize);
+      context.clearRect(this.bottom[1] * 40, this.bottom[0] * 40, blockSize, blockSize);
+      gameMap[this.top[0]][this.top[1]] = 7
+      gameMap[this.middle[0]][this.middle[1]] = 7
+      gameMap[this.bottom[0]][this.bottom[1]] = 7
+      this.top[0] = bottom[0] - 3
+      this.middle[0] = bottom[0] - 2
+      this.bottom[0] = bottom[0] - 1
+      gameMap[this.top[0]][this.top[1]] = this.animals[0]
+      gameMap[this.middle[0]][this.middle[1]] = this.animals[1]
+      gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
+      drawCanvas()
+      score.innerHTML = Number(score.innerHTML) + (slamDistance * 10)
+    }  
+  }
   changeOrder() {
     if (!paused && !gameOver) {
       context.clearRect(this.top[1] * 40, this.top[0] * 40, blockSize, blockSize);
@@ -201,7 +232,7 @@ let footerLevel = document.getElementById('level')
 let footerMatches = document.getElementById('matches')
 let score = document.getElementById('score')
 
-window.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
   if (event.key === 'ArrowLeft') {
     currentShape.moveLeft();
   } else if (event.key === 'ArrowUp') {
@@ -210,6 +241,23 @@ window.addEventListener("keydown", (event) => {
     currentShape.moveRight();
   } else if (event.key === 'ArrowDown') {
     currentShape.moveBottom();
+  } else if (event.code === 'Space') {
+    currentShape.slam();
+  } else if (event.ctrlKey && event.key === 'g') {
+    event.preventDefault()
+    newGame()
+  } else if (event.ctrlKey && event.key === 'p') {
+    event.preventDefault()
+    pauseGame()
+  } else if (event.ctrlKey && event.key === 'e') {
+    event.preventDefault()
+    endGame()
+  } else if (event.ctrlKey && event.key === 'm') {
+    event.preventDefault()
+    toggleMusic()
+  } else if (event.ctrlKey && event.key === 's') {
+    event.preventDefault()
+    toggleSound()
   }
 });
 
@@ -394,11 +442,11 @@ let music = true
 let sound = true
 // let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
-backgroundMusic.volume = 0.02
+backgroundMusic.volume = 0.05
 // backgroundMusic.autoplay = true
 
 const beepsound = new Audio('beep.mp3');
-beepsound.volume = 0.1
+beepsound.volume = 0.25
 
 const beep = () => {
   if (sound) {
@@ -441,19 +489,32 @@ const toggleMusic = () => {
   }
 }
 
+let soft = document.getElementById("soft-tick")
+let medium = document.getElementById("medium-tick")
+let loud = document.getElementById("loud-tick")
+
 const volumeSoft = () => {
-  backgroundMusic.volume = 0.01
-  beepsound.volume = 0.05
+  backgroundMusic.volume = 0.025
+  beepsound.volume = 0.125
+  soft.innerHTML = "&#10003"
+  medium.innerHTML = ""
+  loud.innerHTML = ""
 }
 
 const volumeMedium = () => {
   backgroundMusic.volume = 0.05
   beepsound.volume = 0.25
+  soft.innerHTML = ""
+  medium.innerHTML = "&#10003"
+  loud.innerHTML = ""
 }
 
 const volumeLoud = () => {
   backgroundMusic.volume = 0.1
   beepsound.volume = 0.5
+  soft.innerHTML = ""
+  medium.innerHTML = ""
+  loud.innerHTML = "&#10003"
 }
 
 let currentShape

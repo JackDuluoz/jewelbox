@@ -106,6 +106,62 @@ img {
 
 #canvas {
   background-color: black;
+  display: flex;
+}
+
+#about {
+  width: 280px;
+  height: 520px;
+  background-color: black;
+  color: chartreuse;
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+h4 {
+  margin: 0;
+}
+
+#about-text {
+  margin: 0;
+  padding: 0px 10px;
+  font-size: 0.9em;
+}
+
+a {
+  font-style: italic;
+  font-weight: 700;
+  text-decoration: none;
+  color: rgb(123, 63, 0);
+}
+
+a:visited {
+  color: rgb(123, 63, 0);
+}
+
+#about-close {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  background-color: black;
+  color: chartreuse;
+  border: 2px solid chartreuse;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#about-close:hover {
+  cursor: pointer;
+  background-color: chartreuse;
+  color: black
 }
 
 #right-column {

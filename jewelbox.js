@@ -640,3 +640,15 @@ const closeHelp = (event) => {
     document.getElementById("help-content").classList.remove("show")
   }
 }
+
+const openAbout = () => {
+  if (gameOver || paused) {
+    canvas.style.display = 'none'
+    document.getElementById('about').style.display = 'flex'
+  }
+}
+
+const closeAbout = () => {
+  canvas.style.display = 'flex'
+  document.getElementById('about').style.display = 'none'
+}

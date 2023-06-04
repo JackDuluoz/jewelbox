@@ -49,13 +49,24 @@
       <div class="dropdown-content" id="help-content">
         <div>How to Play</div>
         <div>Controls</div>
-        <div>About</div>
+        <div onClick="openAbout()">About</div>
       </div>
     </div>
   </header>
 
   <div class='page'>
     <canvas id="canvas" width="280" height="520"></canvas>
+    <div id="about">
+      <h2>🌳 About 🌳</h2>
+      <div id="about-text">
+        <h4>For Teddy</h4>
+        <p>Forest Friends is inspired by the 1992 Macintosh game <a href="https://en.wikipedia.org/wiki/Jewelbox_(video_game)" rel="noopener noreferrer" target="_blank">Jewelbox</a>, which itself was based on Sega's <a href="https://en.wikipedia.org/wiki/Columns_(video_game)" rel="noopener noreferrer" target="_blank">Columns</a> (1990). For Jewelbox gameplay, see <a href="https://www.youtube.com/watch?v=P_uIR7_OGYo&t=3s" rel="noopener noreferrer" target="_blank">YouTube</a>.</p>
+        <p>Jewelbox is one of many Macintosh games that made me fall in love with computers. To this day, when I hear the music, I immediately feel more relaxed.</p>
+        <p>This version was built from scratch using vanilla JavaScript, HTML, and CSS, and all gameplay takes place inside the versatile HTML &lt;canvas&gt; element.</p>
+        <p>Forest Friends pays homage to an enduring classic of my youth. May you find similar joy amidst the many animals that call this peaceful forest home.</p>
+      </div>
+      <button id="about-close" onClick="closeAbout()">Close</button>
+    </div>
     <div id="right-column">
       <canvas id="nextCanvas" width="60" height="140"></canvas>
       <div class='buttons'>

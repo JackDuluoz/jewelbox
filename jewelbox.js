@@ -441,10 +441,8 @@ const collapseColumns = () => {
 
 let music = true
 let sound = true
-// let mute = document.getElementById("mute")
 const backgroundMusic = new Audio('music.mp3')
 backgroundMusic.volume = 0.05
-// backgroundMusic.autoplay = true
 
 const beepsound = new Audio('beep.mp3');
 beepsound.volume = 0.25
@@ -468,14 +466,12 @@ const toggleSound = () => {
 
 const playMusic = () => {
   music = true
-  // mute.innerHTML = "Mute"
   backgroundMusic.play();
   setTimeout(playMusic, 3600000)
 }
 
 const stopMusic = () => {
   music = false
-  // mute.innerHTML = "Unmute"
   backgroundMusic.pause();
 }
 

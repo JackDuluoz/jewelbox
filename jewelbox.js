@@ -93,6 +93,22 @@ class Jewel {
       gameMap[this.bottom[0]][this.bottom[1]] = this.animals[2]
       drawCanvas()
     } else if (!paused) {
+      if (gameMap[this.bottom[0]][this.bottom[1]] === 8) {
+        if (this.bottom[0] !== 14) {
+          const disappearingAnimal = gameMap[this.bottom[0] + 1][this.bottom[1]]
+          for (let row = 0; row < gameMap.length; row++) {
+            for (let column = 0; column < gameMap[row].length; column++) {
+              if (gameMap[row][column] === disappearingAnimal) {
+                gameMap[row][column] = 7
+                score.innerHTML = Number(score.innerHTML) + (50 * level)
+              }
+            }
+          }
+          context.clearRect(0, 0, 280, 520)
+          drawCanvas()
+          collapseColumns()
+        }
+      }
       checkMatches()
       for (let row = 0; row < 2; row++) {
         for (let column = 0; column < gameMap[row].length; column++) {
@@ -118,7 +134,11 @@ class Jewel {
               lives--
               footerLives.innerHTML = lives
               currentShape = nextShape
-              nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+              if (Math.random() < 0.02) {
+                nextShape = new Jewel(8, 8, 8)
+              } else {
+                nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+              }
               drawNext(nextShape.animals)
               currentShape.create()
               drawCanvas()
@@ -132,7 +152,6 @@ class Jewel {
           }
         }
       }
-      // score.innerHTML = Number(score.innerHTML) + 10
       if (levelMatches >= 50) {
         gameSpeed += 0.1
         level++
@@ -140,7 +159,11 @@ class Jewel {
         levelMatches = 0
       }
       currentShape = nextShape
-      nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+      if (Math.random() < 0.02) {
+        nextShape = new Jewel(8, 8, 8)
+      } else {
+        nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+      }
       drawNext(nextShape.animals)
       currentShape.create()
       drawCanvas()
@@ -196,6 +219,7 @@ const frog = document.getElementById('frog')
 const ladybug = document.getElementById('ladybug')
 const lizard = document.getElementById('lizard')
 const rabbit = document.getElementById('rabbit')
+const unicorn = document.getElementById('unicorn')
 const gameover = document.getElementById('gameover')
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext("2d")
@@ -325,14 +349,23 @@ const drawCanvas = () => {
       if (gameMap[row][column] === 6) {
         context.drawImage(rabbit, 0, 0, 225, 225, column*40, (row-2)*40, blockSize, blockSize)
       }
+      if (gameMap[row][column] === 8) {
+        context.drawImage(unicorn, 0, 0, 294, 294, column*40, (row-2)*40, blockSize, blockSize)
+      }
     }
   }
 }
 
 const drawNext = (animals) => {
-  nextContext.drawImage(animalsY[animals[0]], 0, 0, animalsY[animals[0]].width, animalsY[animals[0]].height, 10, 10, 40, 40)
-  nextContext.drawImage(animalsY[animals[1]], 0, 0, animalsY[animals[1]].width, animalsY[animals[1]].height, 10, 50, 40, 40)
-  nextContext.drawImage(animalsY[animals[2]], 0, 0, animalsY[animals[2]].width, animalsY[animals[2]].height, 10, 90, 40, 40)
+  if (animals[0] === 8 && animals[1] === 8 && animals[2] === 8) {
+    nextContext.drawImage(unicorn, 0, 0, unicorn.width, unicorn.height, 10, 10, 40, 40)
+    nextContext.drawImage(unicorn, 0, 0, unicorn.width, unicorn.height, 10, 50, 40, 40)
+    nextContext.drawImage(unicorn, 0, 0, unicorn.width, unicorn.height, 10, 90, 40, 40)
+  } else {
+    nextContext.drawImage(animalsY[animals[0]], 0, 0, animalsY[animals[0]].width, animalsY[animals[0]].height, 10, 10, 40, 40)
+    nextContext.drawImage(animalsY[animals[1]], 0, 0, animalsY[animals[1]].width, animalsY[animals[1]].height, 10, 50, 40, 40)
+    nextContext.drawImage(animalsY[animals[2]], 0, 0, animalsY[animals[2]].width, animalsY[animals[2]].height, 10, 90, 40, 40)
+  }
 } 
 
 const checkMatches = () => {
@@ -549,7 +582,11 @@ const resetVariables = () => {
   footerMatches.innerHTML = 0
   score.innerHTML = 0
   currentShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
-  nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+  if (Math.random() < 0.02) {
+    nextShape = new Jewel(8, 8, 8)
+  } else {
+    nextShape = new Jewel(randomAnimal(), randomAnimal(), randomAnimal())
+  }
 }
 
 let loop

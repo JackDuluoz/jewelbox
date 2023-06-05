@@ -132,7 +132,7 @@ class Jewel {
           }
         }
       }
-      score.innerHTML = Number(score.innerHTML) + 10
+      // score.innerHTML = Number(score.innerHTML) + 10
       if (levelMatches >= 50) {
         gameSpeed += 0.1
         level++
@@ -242,6 +242,7 @@ document.addEventListener("keydown", (event) => {
   } else if (event.key === 'ArrowDown') {
     currentShape.moveBottom();
   } else if (event.code === 'Space') {
+    event.preventDefault()
     currentShape.slam();
   } else if (event.altKey && event.key === 'n') {
     event.preventDefault()
@@ -641,14 +642,116 @@ const closeHelp = (event) => {
   }
 }
 
+let how = document.getElementById('how')
+let controls = document.getElementById('controls')
+let about = document.getElementById('about')
+
+let howOne = document.getElementById("how-one")
+let howTwo = document.getElementById('how-two')
+let howThree = document.getElementById('how-three')
+let previous = document.getElementById('previous')
+let next = document.getElementById('next')
+
+const howPrevious = () => {
+  if (howThree.style.display === 'flex') {
+    howOne.style.display = 'none'
+    howTwo.style.display = 'flex'
+    howThree.style.display = 'none'
+    next.style.pointerEvents = 'inherit'
+    next.style.cursor = 'pointer'
+    next.style.opacity = 1
+    return
+  }
+  if (howTwo.style.display === 'flex') {
+    howOne.style.display = 'flex'
+    howTwo.style.display = 'none'
+    howThree.style.display = 'none'
+    previous.style.pointerEvents = 'none'
+    previous.style.cursor = 'not-allowed'
+    previous.style.opacity = 0.65
+    return
+  }
+}
+
+const howNext = () => {
+  if (howOne.style.display === 'flex') {
+    howOne.style.display = 'none'
+    howTwo.style.display = 'flex'
+    howThree.style.display = 'none'
+    previous.style.pointerEvents = 'inherit'
+    previous.style.cursor = 'pointer'
+    previous.style.opacity = 1
+    return
+  }
+  if (howTwo.style.display === 'flex') {
+    howOne.style.display = 'none'
+    howTwo.style.display = 'none'
+    howThree.style.display = 'flex'
+    next.style.pointerEvents = 'none'
+    next.style.cursor = 'not-allowed'
+    next.style.opacity = 0.65
+    return
+  }
+}
+
+const resetHow = () => {
+  howOne.style.display = 'flex'
+  howTwo.style.display = 'none'
+  howThree.style.display = 'none'
+  previous.style.pointerEvents = 'none'
+  previous.style.cursor = 'not-allowed'
+  previous.style.opacity = 0.65
+  next.style.pointerEvents = 'inherit'
+  next.style.cursor = 'pointer'
+  next.style.opacity = 1
+}
+
+const openHow = () => {
+  if (gameOver || paused) {
+    resetHow()
+    canvas.style.display = 'none'
+    how.style.display = 'flex'
+    controls.style.display = 'none'
+    about.style.display = 'none'
+  }
+}
+
+const closeHow = () => {
+  canvas.style.display = 'flex'
+  how.style.display = 'none'
+  controls.style.display = 'none'
+  about.style.display = 'none'
+  resetHow()
+}
+
+const openControls = () => {
+  if (gameOver || paused) {
+    canvas.style.display = 'none'
+    how.style.display = 'none'
+    controls.style.display = 'flex'
+    about.style.display = 'none'
+  }
+}
+
+const closeControls = () => {
+  canvas.style.display = 'flex'
+  how.style.display = 'none'
+  controls.style.display = 'none'
+  about.style.display = 'none'
+}
+
 const openAbout = () => {
   if (gameOver || paused) {
     canvas.style.display = 'none'
-    document.getElementById('about').style.display = 'flex'
+    how.style.display = 'none'
+    controls.style.display = 'none'
+    about.style.display = 'flex'
   }
 }
 
 const closeAbout = () => {
   canvas.style.display = 'flex'
-  document.getElementById('about').style.display = 'none'
+  how.style.display = 'none'
+  controls.style.display = 'none'
+  about.style.display = 'none'
 }

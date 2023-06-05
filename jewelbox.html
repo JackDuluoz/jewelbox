@@ -47,8 +47,8 @@
     <div class="dropdown-menu" id="help-dropdown" onmouseover="openHelp()" onmouseout="closeHelp(event)">
       <div class='menu' id="help-menu">Help</div>
       <div class="dropdown-content" id="help-content">
-        <div>How to Play</div>
-        <div>Controls</div>
+        <div onClick="openHow()">How to Play</div>
+        <div onClick="openControls()">Controls</div>
         <div onClick="openAbout()">About</div>
       </div>
     </div>
@@ -56,10 +56,137 @@
 
   <div class='page'>
     <canvas id="canvas" width="280" height="520"></canvas>
+    <div id="how">
+      <h2>🌲 How To Play 🌲</h2>
+      <div class="how-text" id="how-one">
+        <h4 class="how-header">Objective</h4>
+        <div>
+          The object of the game is to get three or more of the same
+          animal in a row, either horizontally, vertically, or diagonally.
+          When this happens, you earn points and the matching animals
+          disappear. Any animals above those that disappear will fall to
+          create new matches until no further matches occur.
+        </div>
+        <br/>
+        <div>
+          Players begin with <b>3 lives</b>. If the animals reach the top
+          of the screen a life is lost until the player has no lives
+          remaining and the game is over. For every <b>100,000 points</b>
+          scored, players earn an additional life. The game levels up every
+          <b>50  matches</b>, at which point the animals will fall a little
+          faster. 
+        </div>
+      </div>
+      <div class="how-text" id="how-two">
+        <h4 class="how-header">Scoring</h4>
+        <div>
+          You score <b>100</b> points each for the first three animals to
+          disappear in a match and <b>150</b> points for each additional
+          animal. After the first round of matches disappear, successive
+          matches are scored as above and <b>multiplied</b> by the round
+          in which the matches occurred. Look out for these opportunities.  
+        </div>
+        <br/>
+        <div>
+          Pressing the <b>space bar</b> will drop the current triplet of
+          animals as far as they can fall. Doing so will earn you <b>10</b>
+          points for every row the triplet falls before coming to rest. It's
+          best to capitalise on this control early on while the animals are
+          falling slowly. These points will dry up as the pace quickens.  
+        </div>
+      </div>
+      <div class="how-text" id="how-three">
+        <h4 class="how-header">Animals</h4>
+        <div>
+          There are <b>7</b> different animals that will fall during the game:
+          the bird, rabbit, ladybird, fox, frog, lizard, and duck. All of
+          the animals are worth <b>100</b> points each. The next version of
+          the game will add new animals when the player passes <b>25,000</b>
+          and <b>50,000</b> points respectively. But which animals? 
+        </div>
+        <br/>
+        <div>
+          <b>Unicorns</b> will fall sporadically and at random throughout
+          the game. Unicorns are a multi-coloured wildcard triplet that always
+          fall together. When they come to rest on an animal, every instance of
+          that animal will follow the unicorns and disappear from the screen,
+          regardless of their position. 
+        </div>
+      </div>
+      <div id="how-buttons">
+        <button class="how-button" id="previous" onClick="howPrevious()">Previous</button>
+        <button class="how-button" onClick="closeHow()">Close</button>
+        <button class="how-button" id="next" onClick="howNext()">Next</button>
+      </div>
+    </div>
+    <div id="controls">
+      <h2>🌲 Controls 🌲</h2>
+      <div id="controls-text">
+        <div class="controls-section">
+          <h4 class="control-header">Game Controls</h4>
+          <div class="control-columns">
+            <div class="control-column">
+              <div class="control-span">
+                <p class="control-key">Up</p>
+                <p class="control-description">Toggle Order</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">Down</p>
+                <p class="control-description">Move Down</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">Space</p>
+                <p class="control-description">Drop</p>
+              </div>
+            </div>
+            <div class="control-column">
+              <div class="control-span">
+                <p class="control-key">Left</p>
+                <p class="control-description">Move Left</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">Right</p>
+                <p class="control-description">Move Right</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="controls-section" id="special-keys">
+          <h4 class="control-header">Special Keys</h4>
+          <div class="control-columns">
+            <div class="control-column">
+              <div class="control-span">
+                <p class="control-key">alt + n</p>
+                <p class="control-description">New Game</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">alt + p</p>
+                <p class="control-description">Pause Game</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">alt + e</p>
+                <p class="control-description">End Game</p>
+              </div>
+            </div>
+            <div class="control-column">
+              <div class="control-span">
+                <p class="control-key">alt + m</p>
+                <p class="control-description">Toggle Music</p>
+              </div>
+              <div class="control-span">
+                <p class="control-key">alt + s</p>
+                <p class="control-description">Toggle Sound</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="controls-close" onClick="closeControls()">Close</button>
+    </div>
     <div id="about">
-      <h2>🌳 About 🌳</h2>
+      <h2>🌲 About 🌲</h2>
       <div id="about-text">
-        <h4>For Teddy</h4>
+        <h4 class="about-header">For Teddy</h4>
         <p>Forest Friends is inspired by the 1992 Macintosh game <a href="https://en.wikipedia.org/wiki/Jewelbox_(video_game)" rel="noopener noreferrer" target="_blank">Jewelbox</a>, which itself was based on Sega's <a href="https://en.wikipedia.org/wiki/Columns_(video_game)" rel="noopener noreferrer" target="_blank">Columns</a> (1990). For Jewelbox gameplay, see <a href="https://www.youtube.com/watch?v=P_uIR7_OGYo&t=3s" rel="noopener noreferrer" target="_blank">YouTube</a>.</p>
         <p>Jewelbox is one of many Macintosh games that made me fall in love with computers. To this day, when I hear the music, I immediately feel more relaxed.</p>
         <p>This version was built from scratch using vanilla JavaScript, HTML, and CSS, and all gameplay takes place inside the versatile HTML &lt;canvas&gt; element.</p>
